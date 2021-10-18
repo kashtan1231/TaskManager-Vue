@@ -1,3 +1,14 @@
+class Task {
+  constructor({ name, date, user, description, state, id }) {
+    this.name = name;
+    this.user = user;
+    this.date = date;
+    this.description = description;
+    this.state = state;
+    this.id = id;
+  }
+}
+
 const app = {
   data: () => ({
     isPopItShow: false,
@@ -13,29 +24,11 @@ const app = {
       state: null,
       id: 0,
     },
-
-    task: {
-      name: null,
-      date: null,
-      user: null,
-      description: null,
-      state: null,
-      id: 0,
-    },
   }),
 
   methods: {
     addTask() {
-      console.log(this.tasks);
-      this.tasks.push(this.taskNew);
-      console.log(this.tasks);
-      const i = this.task.id.length - 1;
-      this.tasks[0].name = this.taskNew.name;
-      this.tasks[0].date = this.taskNew.date;
-      this.tasks[0].user = this.taskNew.user;
-      this.tasks[0].description = this.taskNew.description;
-      this.tasks[this.tasks.length - 1].state = this.taskNew.state;
-      console.log(this.tasks);
+      this.tasks.push(new Task(this.taskNew));
     },
 
     keyPressed() {
