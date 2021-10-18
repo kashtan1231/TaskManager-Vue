@@ -26,9 +26,9 @@
     <div class="container" @keypress.enter="isPopItShow = false, keyPressed()">
 
         <div class="flexBox">
-            <div class="newTask" v-for="(task, i) in tasks">
+            <div class="newTask" v-for="task in tasks">
                 <!-- <p>{{ i }}</p> -->
-                <h3>{{ task[i].name }}</h3>
+                <h3>{{ task.name }}</h3>
                 <div class="content">
                     <div class="date">
                         <p>{{ task.date }}</p>
@@ -58,24 +58,24 @@
             </div>
             <div class="nameBox">
                 <label for="text">Название: </label>
-                <input class="nameNew" type="text" :value="task.name" @input="inputCloneName">
+                <input class="nameNew" type="text" :value="taskNew.name" @input="inputCloneName">
             </div>
             <div class="dateBox">
                 <label for="date">Дата: </label>
-                <input class="dateNew" type="date" @input="inputCloneDate">
+                <input class="dateNew" type="date" :value="taskNew.date" @input="inputCloneDate">
             </div>
             <div class="userBox">
                 <label for="text">Имя и фамилия: </label>
-                <input class="userNew" type="text" @input="inputCloneUser">
+                <input class="userNew" type="text" :value="taskNew.user" @input="inputCloneUser">
             </div>
             <div class="descBox">
                 <label for="text">Описание: </label>
-                <textarea class="descriptionNew" type="text" placeholder="Необязательное поле"
+                <textarea class="descriptionNew" type="text" :value="taskNew.decs" placeholder="Необязательное поле"
                     @input="inputCloneDesc"></textarea>
             </div>
             <div class="stateBox">
                 <label for="text">Статус:</label>
-                <select class="stateNew" @input="inputCloneState">
+                <select class="stateNew" :value="taskNew.state" @input="inputCloneState">
                     <option value="К выполнению">К выполнению</option>
                     <option value="В процессе">В процессе</option>
                     <option value="Тестирование">Тестирование</option>

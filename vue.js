@@ -20,20 +20,22 @@ const app = {
       user: null,
       description: null,
       state: null,
-      id: 0
+      id: 0,
     },
   }),
 
   methods: {
     addTask() {
-      this.tasks.push(this.task);
-
+      console.log(this.tasks);
+      this.tasks.push(this.taskNew);
+      console.log(this.tasks);
       const i = this.task.id.length - 1;
-      this.tasks[this.tasks.length - 1].name = this.taskNew.name;
-      this.tasks[this.tasks.length - 1].date = this.taskNew.date;
-      this.tasks[this.tasks.length - 1].user = this.taskNew.user;
-      this.tasks[this.tasks.length - 1].description = this.taskNew.description;
+      this.tasks[0].name = this.taskNew.name;
+      this.tasks[0].date = this.taskNew.date;
+      this.tasks[0].user = this.taskNew.user;
+      this.tasks[0].description = this.taskNew.description;
       this.tasks[this.tasks.length - 1].state = this.taskNew.state;
+      console.log(this.tasks);
     },
 
     keyPressed() {
