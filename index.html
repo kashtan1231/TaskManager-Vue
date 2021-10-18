@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body id="app">
+    <header>
+        <input class="search" type="text" placeholder="Поиск по назваию">
+
+        <div class="filterBox">
+            <select class="filter">
+                <option value="Sample">Все</option>
+            </select>
+            <button class="filterButton">{{ string }}</button>
+        </div>
+        <h1>TASK MANAGER</h1>
+
+    </header>
+
+    <div class="container" @keypress.enter="isPopItShow = false, keyPressed()">
+
+        <div class="flexBox">
+            <div class="newTask" v-for="(task, i) in tasks">
+                <!-- <p>{{ i }}</p> -->
+                <h3>{{ task[i].name }}</h3>
+                <div class="content">
+                    <div class="date">
+                        <p>{{ task.date }}</p>
+                    </div>
+                    <div class="user">
+                        <p>{{ task.user }}</p>
+                    </div>
+                </div>
+                <div class="desc">
+                    <p>{{ task.description }}</p>
+                </div>
+                <div class="state">
+                    <p>{{ task.state }}</p>
+                </div>
+            </div>
+            <button class="addTask" @click="isPopItShow = true">+</button>
+        </div>
+
+        <div :class="isPopItShow === true ? 'fogging' : 'hide'"></div>
+
+        <div :class="isPopItShow === true ? 'popIt' : 'hide'" @keypress.enter="isPopItShow = false">
+            <div class="attention">
+                <p>Заполните пустые поля</p>
+            </div>
+            <div class="attentionDate">
+                <p>Поставьте правильную дату</p>
+            </div>
+            <div class="nameBox">
+                <label for="text">Название: </label>
+                <input class="nameNew" type="text" :value="task.name" @input="inputCloneName">
+            </div>
+            <div class="dateBox">
+                <label for="date">Дата: </label>
+                <input class="dateNew" type="date" @input="inputCloneDate">
+            </div>
+            <div class="userBox">
+                <label for="text">Имя и фамилия: </label>
+                <input class="userNew" type="text" @input="inputCloneUser">
+            </div>
+            <div class="descBox">
+                <label for="text">Описание: </label>
+                <textarea class="descriptionNew" type="text" placeholder="Необязательное поле"
+                    @input="inputCloneDesc"></textarea>
+            </div>
+            <div class="stateBox">
+                <label for="text">Статус:</label>
+                <select class="stateNew" @input="inputCloneState">
+                    <option value="К выполнению">К выполнению</option>
+                    <option value="В процессе">В процессе</option>
+                    <option value="Тестирование">Тестирование</option>
+                    <option value="Готова">Готово</option>
+                </select>
+            </div>
+            <div class="buttonBox">
+                <input class="delete" type="button" value="Удалить" @click="isPopItShow = false">
+                <input class="cancer" type="button" value="Отмена" @click="isPopItShow = false">
+                <input class="apply" type="button" value="Ок"
+                    @click="isPopItShow = false, addTask()">
+            </div>
+        </div>
+
+        <script src="https://unpkg.com/vue@next"></script>
+        <script src="vue.js"></script>
+</body>
+
+</html>
