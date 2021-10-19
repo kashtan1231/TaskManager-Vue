@@ -18,7 +18,7 @@ const app = {
     isCurrTask: false,
     idx: 0,
 
-    searchValue: null,
+    searchValue: "",
     optionValue: "Все",
 
     tasks: [],
@@ -107,11 +107,11 @@ const app = {
     },
 
     nullAll() {
-      this.taskNew.name = "Name";
-      this.taskNew.date = "2021-10-21";
-      this.taskNew.user = "User";
-      this.taskNew.description = "Desc";
-      this.taskNew.state = "В процессе";
+      this.taskNew.name = "";
+      this.taskNew.date = "";
+      this.taskNew.user = "";
+      this.taskNew.description = "";
+      this.taskNew.state = "";
 
       this.isCurrTask = false;
     },

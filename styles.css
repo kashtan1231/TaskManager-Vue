@@ -142,9 +142,10 @@ header {
   color: aliceblue;
 }
 
-.addTask:focus {
-  margin-top: 1000px;
-  transition-delay: 0.1s;
+.addTask:active {
+  background-color: whitesmoke;
+  color: black;
+  transition-duration: 0s;
 }
 
 .qwerty {
@@ -162,6 +163,7 @@ header {
 
 .newTask h3 {
   text-align: center;
+  margin-bottom: 5px;
 }
 
 .name {
