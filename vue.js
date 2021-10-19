@@ -102,10 +102,6 @@ const app = {
       }
     },
 
-    keyPressed() {
-      console.log("Space pressed");
-    },
-
     nullAll() {
       this.taskNew.name = "";
       this.taskNew.date = "";
