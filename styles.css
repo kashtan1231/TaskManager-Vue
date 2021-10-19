@@ -5,6 +5,10 @@
   margin: 0;
 }
 
+[v-cloak] {
+  display: none;
+}
+
 body {
   background-color: whitesmoke;
   background-image: url(img/4853433.jpg);
@@ -41,7 +45,7 @@ header {
 
   font-family: inherit;
   margin-bottom: 60px;
-  
+
   position: absolute;
   right: 20px;
 }
@@ -69,6 +73,7 @@ header {
 .filterButton {
   height: 30px;
   width: 90px;
+  margin-left: 5px;
 
   font-family: inherit;
 
@@ -247,6 +252,7 @@ header {
 
 .stateNew {
   margin-top: 5px;
+  margin-left: 10px;
   font-family: inherit;
   border: none;
   outline: none;
@@ -277,6 +283,8 @@ header {
   font-family: inherit;
   padding: 10px;
   border-radius: 100px;
+
+  margin-left: 5px;
 
   border: none;
   background-color: white;
@@ -313,7 +321,7 @@ header {
   left: 50%;
   transform: translate(-50%);
   color: tomato;
-  display: none;
+  display: block;
 }
 
 .fogging {

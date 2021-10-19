@@ -9,73 +9,74 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body id="app">
+<body id="app" v-cloak>
     <header>
-        <input class="search" type="text" placeholder="Поиск по назваию">
+        <input class="search" type="text" placeholder="Поиск по назваию" v-model="searchValue" @input="search()">
 
         <div class="filterBox">
-            <select class="filter">
-                <option value="Sample">Все</option>
+            <select class="filter" v-model="optionValue">
+                <option value="Все">Все</option>
+                <option v-for="(item, i) in users">{{ item }}</option>
             </select>
-            <button class="filterButton">{{ string }}</button>
+            <button class="filterButton" @click="filter()">Фильтр</button>
         </div>
         <h1>TASK MANAGER</h1>
 
     </header>
 
-    <div class="container" @keypress.enter="isPopItShow = false, keyPressed()">
+    <div class="container">
 
         <div class="flexBox">
-            <div class="newTask" v-for="task in tasks">
-                <!-- <p>{{ i }}</p> -->
-                <h3>{{ task.name }}</h3>
+            <div :class="item.isClassShow === true ? 'newTask' : 'hide'" v-for="(item, i) in tasks" 
+                @click="isPopItShow = true, isDeleteShow = true, isAttentionShow = false, isAttentionDateShow = false, currentTask(i)">
+                <h3>{{ item.name }}</h3>
                 <div class="content">
                     <div class="date">
-                        <p>{{ task.date }}</p>
+                        <p>{{ item.date }}</p>
                     </div>
                     <div class="user">
-                        <p>{{ task.user }}</p>
+                        <p>{{ item.user }}</p>
                     </div>
                 </div>
                 <div class="desc">
-                    <p>{{ task.description }}</p>
+                    <p>{{ item.description }}</p>
                 </div>
                 <div class="state">
-                    <p>{{ task.state }}</p>
+                    <p>{{ item.state }}</p>
                 </div>
             </div>
-            <button class="addTask" @click="isPopItShow = true">+</button>
+            <button class="addTask" @click="isPopItShow = true, isDeleteShow = false, isAttentionShow = false, isAttentionDateShow = false, nullAll()">+</button>
         </div>
 
         <div :class="isPopItShow === true ? 'fogging' : 'hide'"></div>
 
-        <div :class="isPopItShow === true ? 'popIt' : 'hide'" @keypress.enter="isPopItShow = false">
-            <div class="attention">
+        <div :class="isPopItShow === true ? 'popIt' : 'hide'">
+            <div :class="isAttentionShow === true ? 'attention' : 'hide'">
                 <p>Заполните пустые поля</p>
             </div>
-            <div class="attentionDate">
+            <div :class="isAttentionDateShow === true ? 'attentionDate' : 'hide'">
                 <p>Поставьте правильную дату</p>
             </div>
             <div class="nameBox">
                 <label for="text">Название: </label>
-                <input class="nameNew" type="text" :value="taskNew.name" @input="inputCloneName">
+                <input class="nameNew" type="text" v-model="taskNew.name">
             </div>
             <div class="dateBox">
                 <label for="date">Дата: </label>
-                <input class="dateNew" type="date" :value="taskNew.date" @input="inputCloneDate">
+                <input class="dateNew" type="date" v-model="taskNew.date">
             </div>
             <div class="userBox">
                 <label for="text">Имя и фамилия: </label>
-                <input class="userNew" type="text" :value="taskNew.user" @input="inputCloneUser">
+                <input class="userNew" type="text" v-model="taskNew.user">
             </div>
             <div class="descBox">
                 <label for="text">Описание: </label>
-                <textarea class="descriptionNew" type="text" :value="taskNew.decs" placeholder="Необязательное поле"
-                    @input="inputCloneDesc"></textarea>
+                <textarea class="descriptionNew" type="text" placeholder="Необязательное поле"
+                    v-model="taskNew.description"></textarea>
             </div>
             <div class="stateBox">
                 <label for="text">Статус:</label>
-                <select class="stateNew" :value="taskNew.state" @input="inputCloneState">
+                <select class="stateNew" v-model="taskNew.state">
                     <option value="К выполнению">К выполнению</option>
                     <option value="В процессе">В процессе</option>
                     <option value="Тестирование">Тестирование</option>
@@ -83,13 +84,15 @@
                 </select>
             </div>
             <div class="buttonBox">
-                <input class="delete" type="button" value="Удалить" @click="isPopItShow = false">
+                <input :class="isDeleteShow === true ? 'delete' : 'hide'" type="button" value="Удалить"
+                    @click="isPopItShow = false, deleteTask()">
                 <input class="cancer" type="button" value="Отмена" @click="isPopItShow = false">
-                <input class="apply" type="button" value="Ок"
-                    @click="isPopItShow = false, addTask()">
+                <input class="apply" type="button" value="Ок" @click="isPopItShow = false, apply()">
             </div>
         </div>
 
+        <!-- <script src="main.js"></script>
+        <script src="newTask.js"></script> -->
         <script src="https://unpkg.com/vue@next"></script>
         <script src="vue.js"></script>
 </body>
