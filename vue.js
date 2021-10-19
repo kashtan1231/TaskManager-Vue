@@ -1,11 +1,10 @@
 class Task {
-  constructor({ name, date, user, description, state, id, isClassShow }) {
+  constructor({ name, date, user, description, state, isClassShow }) {
     this.name = name.trim();
     this.date = date;
     this.user = user.trim();
     this.description = description.trim();
     this.state = state;
-    this.id = id;
     this.isClassShow = isClassShow;
   }
 }
@@ -31,7 +30,6 @@ const app = {
       user: null,
       description: null,
       state: null,
-      id: 0,
       isClassShow: true,
     },
   }),
@@ -55,35 +53,31 @@ const app = {
         this.taskNew.user.trim() &&
         this.taskNew.state
       ) {
-        if (this.isCurrTask) {
-          this.tasks[this.idx].name = this.taskNew.name.trim();
-          this.tasks[this.idx].date = this.taskNew.date;
-          this.tasks[this.idx].user = this.taskNew.user.trim();
-          this.tasks[this.idx].description = this.taskNew.description.trim();
-          this.tasks[this.idx].state = this.taskNew.state;
-          this.tasks[this.idx].id = this.taskNew.id;
-          // this.tasks[this.idx] = this.taskNew
-        } else {
-          console.log(this.taskNew.state);
-          const today = new Date();
+        const today = new Date();
 
-          const [yearPop, monthPop, dayPop] = this.taskNew.date.split("-");
-          const [year, month, day] = [
-            today.getFullYear(),
-            today.getMonth() + 1,
-            today.getDate(),
-          ];
+        const [yearPop, monthPop, dayPop] = this.taskNew.date.split("-");
+        const [year, month, day] = [
+          today.getFullYear(),
+          today.getMonth() + 1,
+          today.getDate(),
+        ];
 
-          console.log(+yearPop, +monthPop, +dayPop, year, month, day);
+        console.log(+yearPop, +monthPop, +dayPop, year, month, day);
 
-          if (
-            this.dateComp(+year, +month, +day, +yearPop, +monthPop, +dayPop) ===
-            true
-          ) {
+        if (
+          this.dateComp(+year, +month, +day, +yearPop, +monthPop, +dayPop) ===
+          true
+        ) {
+          if (this.isCurrTask) {
+            this.tasks[this.idx].name = this.taskNew.name.trim();
+            this.tasks[this.idx].date = this.taskNew.date;
+            this.tasks[this.idx].user = this.taskNew.user.trim();
+            this.tasks[this.idx].description = this.taskNew.description.trim();
+            this.tasks[this.idx].state = this.taskNew.state;
+          } else {
             this.tasks.push(new Task(this.taskNew));
 
             const i = this.tasks.length - 1;
-            this.tasks[i].id = i;
 
             let chek = false;
             for (const item of this.users) {
@@ -95,11 +89,11 @@ const app = {
             if (!chek) {
               this.users.push(this.tasks[i].user);
             }
-          } else {
-            this.isAttentionShow = false;
-            this.isAttentionDateShow = true;
-            this.isPopItShow = true;
           }
+        } else {
+          this.isAttentionShow = false;
+          this.isAttentionDateShow = true;
+          this.isPopItShow = true;
         }
       } else {
         this.isAttentionShow = true;
