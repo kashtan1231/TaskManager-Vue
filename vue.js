@@ -49,22 +49,22 @@ const app = {
     },
 
     apply() {
-      if (this.isCurrTask) {
-        this.tasks[this.idx].name = this.taskNew.name;
-        this.tasks[this.idx].date = this.taskNew.date;
-        this.tasks[this.idx].user = this.taskNew.user;
-        this.tasks[this.idx].description = this.taskNew.description;
-        this.tasks[this.idx].state = this.taskNew.state;
-        this.tasks[this.idx].id = this.taskNew.id;
-        // this.tasks[this.idx] = this.taskNew
-      } else {
-        if (
-          this.taskNew.name &&
-          this.taskNew.date &&
-          this.taskNew.user &&
-          this.taskNew.state
-        ) {
-          console.log(this.taskNew.state)
+      if (
+        this.taskNew.name.trim() &&
+        this.taskNew.date &&
+        this.taskNew.user.trim() &&
+        this.taskNew.state
+      ) {
+        if (this.isCurrTask) {
+          this.tasks[this.idx].name = this.taskNew.name.trim();
+          this.tasks[this.idx].date = this.taskNew.date;
+          this.tasks[this.idx].user = this.taskNew.user.trim();
+          this.tasks[this.idx].description = this.taskNew.description.trim();
+          this.tasks[this.idx].state = this.taskNew.state;
+          this.tasks[this.idx].id = this.taskNew.id;
+          // this.tasks[this.idx] = this.taskNew
+        } else {
+          console.log(this.taskNew.state);
           const today = new Date();
 
           const [yearPop, monthPop, dayPop] = this.taskNew.date.split("-");
@@ -76,7 +76,10 @@ const app = {
 
           console.log(+yearPop, +monthPop, +dayPop, year, month, day);
 
-          if (this.dateComp(+year, +month, +day, +yearPop, +monthPop, +dayPop) === true) {
+          if (
+            this.dateComp(+year, +month, +day, +yearPop, +monthPop, +dayPop) ===
+            true
+          ) {
             this.tasks.push(new Task(this.taskNew));
 
             const i = this.tasks.length - 1;
@@ -97,11 +100,11 @@ const app = {
             this.isAttentionDateShow = true;
             this.isPopItShow = true;
           }
-        } else {
-          this.isAttentionShow = true;
-          this.isAttentionDateShow = false;
-          this.isPopItShow = true;
         }
+      } else {
+        this.isAttentionShow = true;
+        this.isAttentionDateShow = false;
+        this.isPopItShow = true;
       }
     },
 
