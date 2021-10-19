@@ -111,10 +111,10 @@ const app = {
 
     nullAll() {
       this.taskNew.name = "Name";
-      this.taskNew.date = null;
+      this.taskNew.date = "2021-10-21";
       this.taskNew.user = "User";
       this.taskNew.description = "Desc";
-      this.taskNew.state = null;
+      this.taskNew.state = "В процессе";
 
       this.isCurrTask = false;
     },
